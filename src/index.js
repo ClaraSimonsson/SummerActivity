@@ -3,14 +3,29 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import theme from './theme';
+import { Suspense, lazy } from 'react';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const Camera = lazy(() => import('./Pages/Camera'));
+const rootElement = document.getElementById('root');
+const root = ReactDOM.createRoot(rootElement);
+
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<App />}>
+              <Route path="/camera" element={<Camera />} />
+            </Route>
+          </Routes>
+        </Suspense>
+        <CssBaseline />
+      </BrowserRouter>
+    </ThemeProvider>
   </React.StrictMode>
 );
 
