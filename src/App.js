@@ -1,20 +1,14 @@
+import { Container } from '@mui/material';
 import './App.css';
-import { Suspense, lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
-const Home = lazy(() => import('./Pages/Home'));
-const Camera = lazy(() => import('./Pages/Camera'));
+import Home from './Pages/Home';
 
-const App = () => {
+
+function App() {
   return (
-     <>
-        <Suspense fallback={<div>Loading...</div>}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/camera" element={<Camera />} />
-          </Routes>
-        </Suspense>
-     </>
+    <Container maxWidth="sm">
+      <Home />
+    </Container>
   );
- };
+}
 
 export default App;
